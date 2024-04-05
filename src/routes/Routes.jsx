@@ -4,11 +4,14 @@ import {
 import Roots from "../layouts/Roots";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
+import ErrorElement from "../pages/ErrorElement/ErrorElement";
 
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Roots></Roots>,
+      errorElement: <ErrorElement></ErrorElement>,
       children: [
         {
             path: '/',
@@ -18,6 +21,10 @@ import Login from "../pages/Login/Login";
             path: '/login',
             element: <Login></Login>
         },
+        {
+            path: '/register',
+            element: <Register></Register>
+        }
       ]
     },
   ]);
