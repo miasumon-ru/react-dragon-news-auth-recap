@@ -8,7 +8,7 @@ const BreakingNews = () => {
         <div>
 
             <div className='flex'>
-                <button className='btn btn-primary'>Latest</button>
+                <button className='btn btn-primary'>Latest News</button>
                 <Marquee pauseOnHover={true} speed={150}>
                 <Link to='/' className='mr-12'> Match Highlight - Germany vs Spain </Link>
                 <Link to='/' className='mr-12'> Match Highlight - Germany vs Spain </Link>

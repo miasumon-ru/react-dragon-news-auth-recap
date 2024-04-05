@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import user from '../../../assets/user.png'
 
 
@@ -10,6 +10,7 @@ const Navbar = () => {
         <li><NavLink to={'/'} > Home </NavLink></li>
         <li><NavLink to={'/about'} > About </NavLink></li>
         <li><NavLink to={'/career'} > Career </NavLink></li>
+        <li><NavLink to={'/login'} > Login </NavLink></li>
 
 
 
@@ -46,7 +47,7 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <a className="btn">Login</a>
+                <Link to={'/login'}> <button className="btn btn-ghost">Login</button> </Link>
             </div>
         </div>
     );
