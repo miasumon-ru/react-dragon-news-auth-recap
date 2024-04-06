@@ -11,24 +11,31 @@ const AuthProvider = ({children}) => {
 
     // state
 
-    const [user, setUser] = useState()
+    const [user, setUser] = useState(null)
+
+    const [news, setNews] = useState([])
+
+    const [loading , setLoading] = useState(true)
 
     // creating a user 
   
 
     const createUser = (email, password) => {
+        setLoading(true)
         return   createUserWithEmailAndPassword(auth, email, password)
     }
 
     // signIn
 
     const signIn = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     // logOut
 
     const logOut = () => {
+        setLoading(true)
         return signOut(auth)
     }
 
@@ -37,8 +44,8 @@ const AuthProvider = ({children}) => {
     useEffect(()=> {
 
         const unSubscribe = onAuthStateChanged(auth, currentUser =>{
-
             setUser(currentUser)
+            setLoading(false)
 
         })
 
@@ -48,7 +55,19 @@ const AuthProvider = ({children}) => {
         
     },[])
 
-    const authInfo = {createUser , user, logOut, signIn }
+    // news data 
+
+    useEffect(()=> {
+        
+       fetch('/news.json')
+        .then(result => result.json())
+        .then(data => setNews(data))
+
+    }, [])
+
+    // AuthInfo which is passed  and any children can access it by using useContext
+
+    const authInfo = {createUser , user, logOut, signIn, news, loading }
 
     return (
         <AuthContext.Provider value={authInfo} >

@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../shared/Navbar/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider/AuthProvider";
 
 const Register = () => {
-    const {createUser} = useContext(AuthContext)
-
+    const {createUser, logOut} = useContext(AuthContext)
+    
+   const navigate =  useNavigate()
     const handleRegister = (e) => {
 
         e.preventDefault()
@@ -26,6 +27,19 @@ const Register = () => {
         createUser(email, password)
         .then(result => {
             console.log(result.user)
+            e.target.reset()
+
+            // navigating to home after registration
+
+            navigate('/')
+
+            // logout immediately after registering
+            logOut()
+            .then(()=> {
+                console.log('logout successfuly')
+            })
+            .catch(error => console.log(error))
+
         })
         .catch(error => console.log(error))
 
@@ -83,10 +97,10 @@ const Register = () => {
                             <button className="btn btn-primary">Login</button>
                         </div>
 
-                        <p className="mt-5">Do not have an account ?
+                        <p className="mt-5">Already have an account ?
                         <br /> Please  
-                           <Link to={'/register'} >
-                              <span className="font-bold text-blue-700">   Register </span>
+                           <Link to={'/login'} >
+                              <span className="font-bold text-blue-700"> Login </span>
                              </Link>
                         </p>
                     </form>
